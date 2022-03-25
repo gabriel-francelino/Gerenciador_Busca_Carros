@@ -15,17 +15,17 @@
 
 
 typedef struct no_{
-    char modelo;
-    char marca;
-    char tipo;
-    int ano;
-    int km;
-    int potencia;
-    char combustivel;
-    char cambio;
-    char direcao;
-    char cor;
-    int nPortas;
+    char modelo[20];
+    char marca[20];
+    char tipo[20];
+    char ano[4];
+    char km[20];
+    char potencia[5];
+    char combustivel[20];
+    char cambio[20];
+    char direcao[20];
+    char cor[20];
+    char nPortas[2];
     char placa[7];
     
     struct no_* prox;
@@ -38,6 +38,8 @@ typedef struct {
 
 //funções
 tLista* inicia_lista();
+void insere_ord(tLista* ptlista, no* dados);
+void busca_ord(tLista* ptlista,const char* chave, no** ant, no** pont);
  
 
 #endif /* FUNCOES_H */
