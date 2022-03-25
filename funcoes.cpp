@@ -1,84 +1,215 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/cppFiles/file.cc to edit this template
- */
-
 #include <iostream>
-#include <stdlib.h>
-#include "funcoes.h"
 #include <string.h>
+
+#include "funcoes.h"
 
 using namespace std;
 
-//inicia lista
+
 tLista* inicia_lista() {
-    tLista* tmp = new(tLista);
-    tmp->tam = 0;
-    tmp->proxList = NULL;
-
-    cout << "A lista foi iniciada." << endl;
-
-    return tmp;
+	tLista* tmp = new(tLista);
+	tmp->tam = 0;
+	tmp->lista = NULL;
+    cout << "Iniciou a Lista" << endl;
+	return tmp;
 }
 
-void busca_ord(tLista* ptlista,const char* chave, no** ant, no** pont){
-    *ant = ptlista->proxList;
-    *pont = NULL;
-    
-    no* ptr = ptlista->proxList;
-    
-    while(ptr != NULL){
-        if(strcmp(ptr->placa,chave) == -1){
+tLista* encerra_lista(tLista * ptlista) {
+	no *ant = ptlista->lista;
+	no *pont = ptlista->lista;
+	while(ant != NULL){
+		pont = ant->prox;
+		delete(ant);
+		ant = pont;
+	}
+	delete(ptlista);
+    cout << "A lista foi removida" <<endl;
+    return NULL;
+}
+
+bool busca_enc(tLista *ptlista, int placa,  no** ant) {
+    *ant = ptlista->lista;
+	no *ptr = ptlista->lista;
+	while (ptr != NULL && ptr->placa < placa) {
             *ant = ptr;
             ptr = ptr->prox;
-        }else{
-            if(strcmp(ptr->placa, chave) == 0){
-                *pont = ptr;
-            }
-            ptr = NULL;
         }
+	return ptr != NULL && ptr->placa == placa;
+}
+
+bool insere_enc(tLista *ptlista, int placa, no *veiculo){
+	no* ant;
+
+    if (ptlista->tam == 0){
+        ptlista->lista = new(no);
+
+        ptlista->lista->modelo = veiculo->modelo;
+        ptlista->lista->marca = veiculo->marca;
+        ptlista->lista->tipo = veiculo->tipo;
+        ptlista->lista->ano = veiculo->ano;
+        ptlista->lista->km = veiculo->km;
+        ptlista->lista->potencia = veiculo->potencia;
+        ptlista->lista->combustivel = veiculo->combustivel;
+        ptlista->lista->cambio = veiculo->cambio;
+        ptlista->lista->direcao = veiculo->direcao;
+        ptlista->lista->cor = veiculo->cor;
+        ptlista->lista->nPortas = veiculo->nPortas;
+        ptlista->lista->placa = veiculo->placa;
+
+        ptlista->lista->prox = NULL;
+        ptlista->tam++;
+        return true;
+    }
+    if(busca_enc(ptlista, placa, &ant))
+        return false;
+    
+        no * ptr = new(no);
+
+        ptr->modelo = veiculo->modelo;
+        ptr->marca = veiculo->marca;
+        ptr->tipo = veiculo->tipo;
+        ptr->ano = veiculo->ano;
+        ptr->km = veiculo->km;
+        ptr->potencia = veiculo->potencia;
+        ptr->combustivel = veiculo->combustivel;
+        ptr->cambio = veiculo->cambio;
+        ptr->direcao = veiculo->direcao;
+        ptr->cor = veiculo->cor;
+        ptr->nPortas = veiculo->nPortas;
+        ptr->placa = veiculo->placa;
+
+        ptlista->tam++;        
+        if (ant->placa < placa){
+            ptr->prox = ant->prox;
+            ant->prox = ptr;
+    } else {
+        ptr->prox = ptlista->lista;
+        ptlista->lista = ptr;
+    }
+    return true;
+}
+
+bool remove_enc(tLista * ptlista, int placa){
+	no* ant, *ptr;
+	if(ptlista->tam == 0 || !busca_enc(ptlista, placa, &ant))
+            return false;
+        if (ant->placa == placa){
+            ptlista->lista = ant->prox;
+            ptr = ant;
+        } else {
+            ptr = ant->prox;
+            ant->prox = ptr->prox;
+        }
+        ptr->prox = NULL;
+	return true;
+}
+
+void imprime(tLista * ptlista){
+	no *ptr = ptlista->lista;
+    cout << "Impressão da lista" << endl;
+	while(ptr != NULL){
+        cout << "----------------------------" << endl;
+        cout << "Modelo: " << ptr->modelo << endl;
+        cout << "Marca: " << ptr->marca << endl;
+        cout << "Tipo: " << ptr->tipo << endl;
+        cout << "Ano: " << ptr->ano << endl;
+        cout << "KM: " << ptr->km << endl;
+        cout << "Potencia: " << ptr->potencia << endl;
+        cout << "Combustivel: " << ptr->combustivel << endl;
+        cout << "Cambio: " << ptr->cambio << endl;
+        cout << "Direcao: " << ptr->direcao << endl;
+        cout << "Numero de Portas: " << ptr->nPortas << endl;
+        cout << "Placa: " << ptr->placa << endl;
+        cout << "----------------------------" << endl;
+        ptr = ptr->prox;
+	}
+}
+
+// ------------------------------------------------------------------
+
+// ------------------------------------------------------------------
+
+
+
+void insere_pilha(no *end, Pilha *pilha) {
+    noBusca *ptr = new(noBusca);
+    if(ptr == NULL) {
+        cout << "Erro ao inserir na pilha!" << endl;
+    } else {
+        ptr->end = end;
+        ptr->prox = pilha->topo;
+        pilha->topo = ptr->prox;
     }
 }
 
-//insere ordenado na lista principal
-void insere_ord(tLista* ptlista, no* dados){
-    no* ant;
-    no* pont;
-    
-    busca_ord(ptlista, dados->placa, &ant, &pont);
-    
-    if(pont == NULL){
-        no* ptr = new(no);
-        ptr = dados;
-        ptr->prox = ant; //declaração do ant pode estar errada
-        ant = ptr;       
+void imprime_pilha(Pilha *pilha) {
+    noBusca *ptr = pilha->topo;
+
+    if(ptr != NULL) {
+        cout << "Impressão da Fila" << endl;
+	    while(ptr != NULL){
+            cout << "----------------------------" << endl;
+            cout << "Modelo: " << ptr->end->modelo << endl;
+            cout << "Marca: " << ptr->end->marca << endl;
+            cout << "Tipo: " << ptr->end->tipo << endl;
+            cout << "Ano: " << ptr->end->ano << endl;
+            cout << "KM: " << ptr->end->km << endl;
+            cout << "Potencia: " << ptr->end->potencia << endl;
+            cout << "Combustivel: " << ptr->end->combustivel << endl;
+            cout << "Cambio: " << ptr->end->cambio << endl;
+            cout << "Direcao: " << ptr->end->direcao << endl;
+            cout << "Numero de Portas: " << ptr->end->nPortas << endl;
+            cout << "Placa: " << ptr->end->placa << endl;
+            cout << "----------------------------" << endl;
+            ptr = ptr->prox;
+	    }
+    } else {
+        cout << "Pilha Vazia! Sem resultados para a busca.";
     }
 }
 
-/*
-//busca para verificar se a chave já existe 
-void busca(){
-    
+// ------------------------------------------------------------------
+
+void insere_fila(no *end, Fila *fila) {
+    noBusca *ptr = new(noBusca);
+    if(ptr == NULL) {
+        cout << "Erro ao inserir na fila!" << endl;
+    } else {
+        ptr->end = end;
+        ptr->prox = NULL;
+        if(fila->ini == NULL){
+            fila->ini = ptr;
+        } else {
+            fila->fim->prox = ptr;
+        }
+        fila->fim = ptr;
+    }
 }
 
-//encerra lista
-tLista* encerra_lista(){
-    
+void imprime_fila(Fila *fila) {
+    noBusca *ptr = fila->ini;
+
+    if(ptr != NULL) {
+        cout << "Impressão da Fila" << endl;
+	    while(ptr != NULL){
+            cout << "----------------------------" << endl;
+            cout << "Modelo: " << ptr->end->modelo << endl;
+            cout << "Marca: " << ptr->end->marca << endl;
+            cout << "Tipo: " << ptr->end->tipo << endl;
+            cout << "Ano: " << ptr->end->ano << endl;
+            cout << "KM: " << ptr->end->km << endl;
+            cout << "Potencia: " << ptr->end->potencia << endl;
+            cout << "Combustivel: " << ptr->end->combustivel << endl;
+            cout << "Cambio: " << ptr->end->cambio << endl;
+            cout << "Direcao: " << ptr->end->direcao << endl;
+            cout << "Numero de Portas: " << ptr->end->nPortas << endl;
+            cout << "Placa: " << ptr->end->placa << endl;
+            cout << "----------------------------" << endl;
+            ptr = ptr->prox;
+	    }
+    } else {
+        cout << "Fila Vazia! Sem resultados para a busca.";
+    }
 }
 
-
-//remove da lista principal
-no* remove(){
-    
-}
-
-//ordena a lista principal em pilha
-void pilha(){
-    
-} 
-
-//ordena a lista principal em fila
-void fila(){
-  
-} 
-*/
+// ------------------------------------------------------------------
