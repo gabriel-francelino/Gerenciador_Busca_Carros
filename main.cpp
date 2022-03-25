@@ -29,10 +29,9 @@ tLista *lista;
 
 int main(int argc, char** argv) {
     int op;
-    lista = inicia_lista();
-    
-    ifstream cadastro("testes.txt");
+    ifstream cadastro("BD-int.txt");
     if(cadastro.is_open()){   
+        lista = inicia_lista();
         while(!cadastro.eof()){
             no *dados = new(no);
             cadastro >> dados->modelo;
@@ -60,11 +59,13 @@ int main(int argc, char** argv) {
 
     // Daqui pra cima no main ta funcionando
     // ------------------------------------------------
-
+    no* ptr = lista->lista;
+    
     do {
         interface();
-        cout << "Digite o comando: " << endl;
+        cout << "Digite o comando: ";
         cin >> op;
+        cout << endl << "+---------------------------------------+" << endl;
         switch (op) {
             case 1:
                 cout << "Adicionar Veículo" << endl;
@@ -93,8 +94,8 @@ int main(int argc, char** argv) {
                 } else {
                     cout << "Falha ao adicionar." << endl;
                 }
-                interface();
-                op = 2; 
+                
+                
                 break;
             case 2:
                 cout << "Remover Veículo" << endl;
@@ -109,58 +110,48 @@ int main(int argc, char** argv) {
                     cout << "Falha ao remover" << endl;
                 }
 
-                interface();
-                op = 5; 
+                
                 break;
             case 3:
-                cout << "Busca por veículos ano 2019 ou menos. (Pilha)" << endl;
+                cout << "Busca por veiculos ano 2019 ou menos. (Pilha)" << endl;
 
-                // delete(pilha);
-                // pilha->topo = NULL;
-                    
-                // no *ptr = lista->lista;
-                // while(ptr != NULL){
-                //     if(ptr->ano <= 2019) {
-                //         insere_pilha(ptr, pilha);
-                //     }
-                //     ptr = ptr->prox;
-                // }
-                // imprime_pilha(pilha);
-                interface();
+                pilha->topo = NULL; 
+                while(ptr != NULL){
+                    if(ptr->ano <= 2019) {
+                        insere_pilha(ptr, pilha);
+                    }
+                    ptr = ptr->prox;
+                }
+                imprime_pilha(pilha);
+                
                 break;
             case 4:
                 cout << "Busca por veículo com menos de 40.000km (Fila)" << endl;
-                // delete(fila);
-                    
-                // no *ptr = lista->lista;
-                // while(ptr != NULL){
-                //     if(ptr->km < 40000) {
-                //         insere_fila(ptr, fila);
-                //     }
-                //     ptr = ptr->prox;
-                // }
+                delete(fila);
+                   
+                while(ptr != NULL){
+                    if(ptr->km < 40000) {
+                        insere_fila(ptr, fila);
+                    }
+                    ptr = ptr->prox;
+                }
 
-                // imprime_fila(fila);
+                imprime_fila(fila);
 
-                interface();
                 break;
             case 5:
                 cout << "Relatório: " << endl;
                 imprime(lista);
-
-                interface();
-                op = 6; // Temp
                 break;
             case 6:
                 cout << "Finalizar Programa" << endl;
-                op = 7;
                 break;
             default:
                 cout << "Opcao Inválida" << endl;
                 interface();
                 break;
         }
-    } while (op != 7);
+    } while (op != 6);
     
     return 0;
 }
