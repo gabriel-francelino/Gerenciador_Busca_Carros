@@ -105,7 +105,7 @@ bool remove_enc(tLista * ptlista, int placa){
 }
 
 void imprime(tLista * ptlista){
-	no *ptr = ptlista->lista;
+    no *ptr = ptlista->lista;
     cout << "Impressão da lista" << endl;
 	while(ptr != NULL){
         cout << "----------------------------" << endl;
@@ -130,7 +130,6 @@ void imprime(tLista * ptlista){
 // ------------------------------------------------------------------
 
 
-
 void insere_pilha(no *end, Pilha *pilha) {
     noBusca *ptr = new(noBusca);
     if(ptr == NULL) {
@@ -141,6 +140,7 @@ void insere_pilha(no *end, Pilha *pilha) {
         pilha->topo = ptr->prox;
     }
 }
+
 
 void imprime_pilha(Pilha *pilha) {
     noBusca *ptr = pilha->topo;
