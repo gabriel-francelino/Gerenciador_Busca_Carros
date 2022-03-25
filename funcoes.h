@@ -48,6 +48,7 @@ typedef struct Pilha {
     struct no_busca *topo;
 } Pilha;
 
+
 // Fila
 typedef struct Fila {
     struct no_busca *ini;
@@ -66,4 +67,3 @@ void insere_fila(no *end, Fila *fila);
 void imprime_fila(Fila *fila);
 
 #endif /* FUNCOES_H */
-
