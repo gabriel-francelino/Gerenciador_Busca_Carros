@@ -7,40 +7,63 @@
  * File:   funcoes.h
  * Author: anaca
  *
- * Created on 19 de Março de 2022, 12:42
+ * Created on 25 de Março de 2022, 15:13
  */
 
 #ifndef FUNCOES_H
 #define FUNCOES_H
 
+using namespace std;
 
-typedef struct no_{
-    char modelo[20];
-    char marca[20];
-    char tipo[20];
-    char ano[4];
-    char km[20];
-    char potencia[5];
-    char combustivel[20];
-    char cambio[20];
-    char direcao[20];
-    char cor[20];
-    char nPortas[2];
-    char placa[7];
-    
+typedef struct no_ {
+    int modelo;
+    int marca;
+    int tipo;
+    int ano;
+    int km;
+    float potencia;
+    int combustivel;
+    int cambio;
+    int direcao;
+    int cor;
+    int nPortas;
+    int placa;
     struct no_* prox;
-}no;
+} no;
 
+// Lista
 typedef struct {
-    int tam;
-    struct no_ * proxList;
+	int tam;            
+	struct no_ *lista;
 } tLista;
 
-//funções
+// Buscas
+typedef struct no_busca {
+    struct no_ *end;
+    struct no_busca *prox;
+} noBusca;
+
+// Pilha
+typedef struct Pilha {
+    struct no_busca *topo;
+} Pilha;
+
+// Fila
+typedef struct Fila {
+    struct no_busca *ini;
+    struct no_busca *fim;
+} Fila;
+
 tLista* inicia_lista();
-void insere_ord(tLista* ptlista, no* dados);
-void busca_ord(tLista* ptlista,const char* chave, no** ant, no** pont);
- 
+tLista* encerra_lista(tLista * ptlista);
+bool busca_enc(tLista *ptlista, int placa,  no** ant);
+bool insere_enc(tLista *ptlista, int placa, no *veiculo);
+bool remove_enc(tLista * ptlista, int placa);
+void imprime(tLista * ptlista);
+void insere_pilha(no *end, Pilha *pilha);
+void imprime_pilha(Pilha *pilha);
+void insere_fila(no *end, Fila *fila);
+void imprime_fila(Fila *fila);
 
 #endif /* FUNCOES_H */
 
