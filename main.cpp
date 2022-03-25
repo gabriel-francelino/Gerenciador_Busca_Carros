@@ -13,6 +13,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
+#include <string.h>
 #include "funcoes.h"
 
 using namespace std;
@@ -31,19 +32,32 @@ int main(int argc, char** argv) {
            no* dados = new(no);
            
            cadastro >> dados->modelo;
+           cout << dados->modelo << endl;
            cadastro >> dados->marca;
+           cout << dados->marca << endl;
            cadastro >> dados->tipo;
+           cout << dados->tipo << endl;
            cadastro >> dados->ano;
+           cout << dados->ano << endl;
            cadastro >> dados->km;
+           cout << dados->km << endl;
            cadastro >> dados->potencia;
+           cout << dados->potencia << endl;
            cadastro >> dados->combustivel;
+           cout << dados->combustivel << endl;
            cadastro >> dados->cambio;
+           cout << dados->cambio << endl;
            cadastro >> dados->direcao;
+           cout << dados->direcao << endl;
            cadastro >> dados->cor;
+           cout << dados->cor << endl;
            cadastro >> dados->nPortas;
+           cout << dados->nPortas << endl;
            cadastro >> dados->placa;
+           cout << dados->placa << endl;
            dados->prox = NULL;
-           //insere(lista, dados->placa);
+           cout << "-------------------------------------------";
+           insere_ord(lista, dados);
         }
         cadastro.close();
     }else{
