@@ -2,7 +2,10 @@
 #include <iostream>
 #include <fstream>
 #include <string.h>
+
 #include "funcoes.h"
+#include "pilha.h"
+#include "fila.h"
 
 using namespace std;
 
@@ -20,8 +23,8 @@ void interface() {
 }
 
 // Variaveis
-Pilha *pilha;
-Fila *fila;
+//Pilha *pilha;
+//Fila *fila;
 
 tLista *lista;
 
@@ -30,9 +33,9 @@ tLista *lista;
 int main(int argc, char** argv) {
     int op;
     ifstream cadastro("BD-int.txt");
-    if(cadastro.is_open()){   
+    if (cadastro.is_open()) {
         lista = inicia_lista();
-        while(!cadastro.eof()){
+        while (!cadastro.eof()) {
             no *dados = new(no);
             cadastro >> dados->modelo;
             cadastro >> dados->marca;
@@ -60,7 +63,8 @@ int main(int argc, char** argv) {
     // Daqui pra cima no main ta funcionando
     // ------------------------------------------------
     no* ptr = lista->lista;
-    
+    tPilha* pilha = inicia_pilha();
+    tFila* fila = inicia_fila();
     do {
         interface();
         cout << "Digite o comando: ";
@@ -89,13 +93,11 @@ int main(int argc, char** argv) {
                 veiculo.placa = 7865;
                 veiculo.prox = NULL;
 
-                if(insere_enc(lista, veiculo.placa, &veiculo)){
+                if (insere_enc(lista, veiculo.placa, &veiculo)) {
                     cout << "Adicionado com Sucesso!" << endl;
                 } else {
                     cout << "Falha ao adicionar." << endl;
                 }
-                
-                
                 break;
             case 2:
                 cout << "Remover Veículo" << endl;
@@ -104,40 +106,42 @@ int main(int argc, char** argv) {
                 placa = 4572; // cin >> placa;
                 cout << endl;
 
-                if(remove_enc(lista, placa)){
+                if (remove_enc(lista, placa)) {
                     cout << "Removido com sucesso" << endl;
                 } else {
                     cout << "Falha ao remover" << endl;
                 }
-
-                
                 break;
             case 3:
                 cout << "Busca por veiculos ano 2019 ou menos. (Pilha)" << endl;
 
-                pilha->topo = NULL; 
-                while(ptr != NULL){
-                    if(ptr->ano <= 2019) {
-                        insere_pilha(ptr, pilha);
+                if (ptr == NULL) {
+                    cout << "A lista está vazia!!" << endl;
+                } else {
+                    while (ptr != NULL) {
+                        if (ptr->ano <= 2019) {
+                            insere_pilha(pilha, ptr);
+                        }
+                        ptr = ptr->prox;
                     }
-                    ptr = ptr->prox;
+                    imprime(pilha);
                 }
-                imprime_pilha(pilha);
-                
                 break;
             case 4:
                 cout << "Busca por veículo com menos de 40.000km (Fila)" << endl;
-                delete(fila);
-                   
-                while(ptr != NULL){
-                    if(ptr->km < 40000) {
-                        insere_fila(ptr, fila);
+
+                if (ptr == NULL) {
+                    cout << "A lista está vazia!!" << endl;
+                } else {
+                    while (ptr != NULL) {
+                        if (ptr->km < 40000) {
+                            insere_fila(fila, ptr);
+                        }
+                        ptr = ptr->prox;
                     }
-                    ptr = ptr->prox;
+
+                    imprime(fila);
                 }
-
-                imprime_fila(fila);
-
                 break;
             case 5:
                 cout << "Relatório: " << endl;
@@ -152,7 +156,7 @@ int main(int argc, char** argv) {
                 break;
         }
     } while (op != 6);
-    
+
     return 0;
 }
 
