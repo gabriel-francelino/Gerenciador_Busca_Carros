@@ -125,91 +125,29 @@ void imprime(tLista * ptlista){
 	}
 }
 
-// ------------------------------------------------------------------
-
-// ------------------------------------------------------------------
-
-
-void insere_pilha(no *end, Pilha *pilha) {
-    noBusca *ptr = new(noBusca);
-    if(ptr == NULL) {
-        cout << "Erro ao inserir na pilha!" << endl;
-    } else {
-        ptr->end = end;
-        ptr->prox = pilha->topo;
-        pilha->topo = ptr->prox;
-    }
+// ------------------------------PILHA------------------------------------
+void insere_inicio(tLista* topo, no* dados){
+    no* ptr = new(no);
+    
+    ptr = dados;
+    ptr->prox = topo->lista;
+    topo->lista = ptr;
+    topo->tam++;
+    
 }
 
+// ---------------------------------FILA---------------------------------
 
-void imprime_pilha(Pilha *pilha) {
-    noBusca *ptr = pilha->topo;
-
-    if(ptr != NULL) {
-        cout << "Impressão da Fila" << endl;
-	    while(ptr != NULL){
-            cout << "----------------------------" << endl;
-            cout << "Modelo: " << ptr->end->modelo << endl;
-            cout << "Marca: " << ptr->end->marca << endl;
-            cout << "Tipo: " << ptr->end->tipo << endl;
-            cout << "Ano: " << ptr->end->ano << endl;
-            cout << "KM: " << ptr->end->km << endl;
-            cout << "Potencia: " << ptr->end->potencia << endl;
-            cout << "Combustivel: " << ptr->end->combustivel << endl;
-            cout << "Cambio: " << ptr->end->cambio << endl;
-            cout << "Direcao: " << ptr->end->direcao << endl;
-            cout << "Numero de Portas: " << ptr->end->nPortas << endl;
-            cout << "Placa: " << ptr->end->placa << endl;
-            cout << "----------------------------" << endl;
-            ptr = ptr->prox;
-	    }
-    } else {
-        cout << "Pilha Vazia! Sem resultados para a busca.";
+void insere_fim(tLista* ptlista, no* dados){
+    
+    no* ptr = ptlista->lista;
+    while(ptr->prox != NULL){
+        ptr = ptr->prox;
     }
-}
-
-// ------------------------------------------------------------------
-
-void insere_fila(no *end, Fila *fila) {
-    noBusca *ptr = new(noBusca);
-    if(ptr == NULL) {
-        cout << "Erro ao inserir na fila!" << endl;
-    } else {
-        ptr->end = end;
-        ptr->prox = NULL;
-        if(fila->ini == NULL){
-            fila->ini = ptr;
-        } else {
-            fila->fim->prox = ptr;
-        }
-        fila->fim = ptr;
-    }
-}
-
-void imprime_fila(Fila *fila) {
-    noBusca *ptr = fila->ini;
-
-    if(ptr != NULL) {
-        cout << "Impressão da Fila" << endl;
-	    while(ptr != NULL){
-            cout << "----------------------------" << endl;
-            cout << "Modelo: " << ptr->end->modelo << endl;
-            cout << "Marca: " << ptr->end->marca << endl;
-            cout << "Tipo: " << ptr->end->tipo << endl;
-            cout << "Ano: " << ptr->end->ano << endl;
-            cout << "KM: " << ptr->end->km << endl;
-            cout << "Potencia: " << ptr->end->potencia << endl;
-            cout << "Combustivel: " << ptr->end->combustivel << endl;
-            cout << "Cambio: " << ptr->end->cambio << endl;
-            cout << "Direcao: " << ptr->end->direcao << endl;
-            cout << "Numero de Portas: " << ptr->end->nPortas << endl;
-            cout << "Placa: " << ptr->end->placa << endl;
-            cout << "----------------------------" << endl;
-            ptr = ptr->prox;
-	    }
-    } else {
-        cout << "Fila Vazia! Sem resultados para a busca.";
-    }
+    ptr->prox = new(no);
+    ptr->prox = dados;
+    ptr->prox->prox = NULL;
+    ptlista->tam++;  
 }
 
 // ------------------------------------------------------------------
