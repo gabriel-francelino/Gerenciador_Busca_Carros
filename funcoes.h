@@ -37,23 +37,7 @@ typedef struct {
 	struct no_ *lista;
 } tLista;
 
-// Buscas
-typedef struct no_busca {
-    struct no_ *end;
-    struct no_busca *prox;
-} noBusca;
 
-// Pilha
-typedef struct Pilha {
-    struct no_busca *topo;
-} Pilha;
-
-
-// Fila
-typedef struct Fila {
-    struct no_busca *ini;
-    struct no_busca *fim;
-} Fila;
 
 tLista* inicia_lista();
 tLista* encerra_lista(tLista * ptlista);
@@ -61,9 +45,10 @@ bool busca_enc(tLista *ptlista, int placa,  no** ant);
 bool insere_enc(tLista *ptlista, int placa, no *veiculo);
 bool remove_enc(tLista * ptlista, int placa);
 void imprime(tLista * ptlista);
-void insere_pilha(no *end, Pilha *pilha);
-void imprime_pilha(Pilha *pilha);
-void insere_fila(no *end, Fila *fila);
-void imprime_fila(Fila *fila);
+
+//PILHA
+void insere_inicio(tLista* topo, no* dados);
+//FILA
+void insere_fim(tLista* ptlista, no* dados);
 
 #endif /* FUNCOES_H */
