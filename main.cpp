@@ -19,7 +19,7 @@ void interface() {
     cout << "+-------------------------------------------+" << endl;
 }
 
-// Variaveis
+// Variaveis---------------------------------------------------------
 tPilha *pilha;
 tFila *fila;
 tLista *lista;
@@ -68,67 +68,54 @@ int main(int argc, char** argv) {
                 cout << "Digite as informacoes do veiculo:" << endl << endl;
                 no veiculo;
 
-                // cout << "Modelo do veiculo: ";
-                // cin.ignore();
-                // getline(cin, veiculo.modelo);
+                cout << "Modelo do veiculo: ";
+                cin.ignore();
+                getline(cin, veiculo.modelo);
 
-                // cout << "Marca do veiculo: ";
-                // getline(cin, veiculo.marca);
+                cout << "Marca do veiculo: ";
+                getline(cin, veiculo.marca);
 
-                // cout << "Tipo do veiculo: ";
-                // getline(cin, veiculo.tipo);
+                cout << "Tipo do veiculo: ";
+                getline(cin, veiculo.tipo);
 
-                // cout << "Ano do veiculo: "; //INTEIRO
-                // cin >> veiculo.ano;
+                cout << "Ano do veiculo: ";
+                cin >> veiculo.ano;
 
-                // cout << "Km do veiculo: "; //INTEIRO
-                // cin >> veiculo.km;
+                cout << "Km do veiculo: ";
+                cin >> veiculo.km;
 
-                // cout << "Potencia do veiculo: "; //FLOAT
-                // cin >> veiculo.potencia;
+                cout << "Potencia do veiculo: ";
+                cin >> veiculo.potencia;
 
-                // cout << "Combustivel do veiculo: ";
-                // cin.ignore();
-                // getline(cin, veiculo.combustivel);
+                cout << "Combustivel do veiculo: ";
+                cin.ignore();
+                getline(cin, veiculo.combustivel);
 
-                // cout << "Cambio do veiculo: ";
-                // getline(cin, veiculo.cambio);
+                cout << "Cambio do veiculo: ";
+                getline(cin, veiculo.cambio);
 
-                // cout << "Direcao do veiculo: ";
-                // getline(cin, veiculo.direcao);
+                cout << "Direcao do veiculo: ";
+                getline(cin, veiculo.direcao);
 
-                // cout << "Cor do veiculo: ";
-                // getline(cin, veiculo.cor);
+                cout << "Cor do veiculo: ";
+                getline(cin, veiculo.cor);
 
-                // cout << "Numero de portas do veiculo: "; // INTEIRO
-                // cin >> veiculo.nPortas;
+                cout << "Numero de portas do veiculo: ";
+                cin >> veiculo.nPortas;
 
-                // cout << "Placa do veiculo: ";
-                // cin.ignore();
-                // getline(cin, veiculo.placa);
-                // cout << endl;
+                cout << "Placa do veiculo: ";
+                cin.ignore();
+                getline(cin, veiculo.placa);
+                cout << endl;
 
                 veiculo.prox = NULL;
 
-                veiculo.modelo = "City";
-                veiculo.marca = "Honda";
-                veiculo.tipo = "Sedan";
-                veiculo.ano = 2014;
-                veiculo.km = 18000;
-                veiculo.potencia = 1.5;
-                veiculo.combustivel = "Flex";
-                veiculo.cambio = "Automatico";
-                veiculo.direcao = "Hidraulica";
-                veiculo.cor = "Prata";
-                veiculo.nPortas = 4;
-                veiculo.placa = "AA7865";
-
-                if (insere_enc(lista, veiculo.placa, &veiculo)) {
+                if(insere_enc(lista, veiculo.placa, &veiculo)){
                     cout << "Adicionado com sucesso!" << endl;
                 } else {
                     cout << "Falha ao adicionar." << endl;
                 }
-            }
+            };
             break;
             case 2:
             {
