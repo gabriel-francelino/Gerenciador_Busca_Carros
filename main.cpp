@@ -63,8 +63,8 @@ int main(int argc, char** argv) {
     // Daqui pra cima no main ta funcionando
     // ------------------------------------------------
     no* ptr = lista->lista;
-    tPilha* pilha = inicia_pilha();
-    tFila* fila = inicia_fila();
+    tPilha* pilha;
+    tFila* fila;
     do {
         interface();
         cout << "Digite o comando: ";
@@ -114,6 +114,8 @@ int main(int argc, char** argv) {
                 break;
             case 3:
                 cout << "Busca por veiculos ano 2019 ou menos. (Pilha)" << endl;
+                
+                pilha = inicia_pilha();
 
                 if (ptr == NULL) {
                     cout << "A lista está vazia!!" << endl;
@@ -129,6 +131,8 @@ int main(int argc, char** argv) {
                 break;
             case 4:
                 cout << "Busca por veículo com menos de 40.000km (Fila)" << endl;
+                
+                fila = inicia_fila();
 
                 if (ptr == NULL) {
                     cout << "A lista está vazia!!" << endl;
@@ -159,4 +163,3 @@ int main(int argc, char** argv) {
 
     return 0;
 }
-
