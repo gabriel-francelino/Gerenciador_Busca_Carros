@@ -18,7 +18,7 @@
 typedef tLista tPilha;
 
 inline tPilha* inicia_pilha(){
-    return inicia_pilha();
+    return inicia_lista();
 };
 
 //falta o remover lista
