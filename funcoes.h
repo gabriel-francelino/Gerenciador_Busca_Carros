@@ -15,40 +15,64 @@
 
 using namespace std;
 
+// Estrutura de nós da lista----------------------------------------------------
 typedef struct no_ {
-    int modelo;
-    int marca;
-    int tipo;
+    string modelo;
+    string marca;
+    string tipo;
     int ano;
     int km;
     float potencia;
-    int combustivel;
-    int cambio;
-    int direcao;
-    int cor;
+    string combustivel;
+    string cambio;
+    string direcao;
+    string cor;
     int nPortas;
-    int placa;
+    string placa;
     struct no_* prox;
 } no;
 
-// Lista
+// Estrutura do "nó cabeça" da lista--------------------------------------------
 typedef struct {
-	int tam;            
-	struct no_ *lista;
+    int tam;
+    struct no_ *lista;
 } tLista;
 
+// Estrutura de buscas para PILHA e FILA----------------------------------------
+typedef struct noBusca {
+    no *end;
+    struct noBusca *prox;
+} noBusca;
 
+typedef struct pilha {
+    noBusca *topo;
+} tPilha;
 
+typedef struct fila {
+    noBusca *inicio;
+    noBusca *fim;
+} tFila;
+
+// Inicialização da lista--------------------------------------------------------
 tLista* inicia_lista();
-tLista* encerra_lista(tLista * ptlista);
-bool busca_enc(tLista *ptlista, int placa,  no** ant);
-bool insere_enc(tLista *ptlista, int placa, no *veiculo);
-bool remove_enc(tLista * ptlista, int placa);
-void imprime(tLista * ptlista);
+void encerra_lista(tLista *ptlista);
 
-//PILHA
-void insere_inicio(tLista* topo, no* dados);
-//FILA
-void insere_fim(tLista* ptlista, no* dados);
+//funções de gerenciamento
+bool busca_enc(tLista *ptlista, string placa, no **ant);
+bool insere_enc(tLista *ptlista, string placa, no *veiculo);
+bool remove_enc(tLista *ptlista, string placa);
+void imprime(tLista *ptlista);
+
+//-----------------------------------PILHA--------------------------------------
+tPilha* inicia_pilha();
+void insere_pilha(no **end, tPilha *pilha);
+void imprime_pilha(tPilha *pilha);
+void encerra_pilha(tPilha *ptPilha);
+
+//FILA-------------------------------FILA---------------------------------------
+tFila* inicia_fila();
+void insere_fila(no **end, tFila *fila);
+void imprime_fila(tFila *fila);
+void encerra_fila(tFila *ptFila);
 
 #endif /* FUNCOES_H */
