@@ -1,6 +1,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
+//#include <string>
 
 #include "funcoes.h"
 
@@ -68,45 +69,41 @@ int main(int argc, char** argv) {
                 cout << "Digite as informacoes do veiculo:" << endl << endl;
                 no veiculo;
 
-                cout << "Modelo do veiculo: ";
-                cin.ignore();
-                getline(cin, veiculo.modelo);
+                cout << "Modelo do veiculo: (Para nomes compostos: nome1_nome2)" << endl;
+                cin >> veiculo.modelo;
 
-                cout << "Marca do veiculo: ";
-                getline(cin, veiculo.marca);
+                cout << "Marca do veiculo: " << endl;
+                cin >> veiculo.marca;
 
-                cout << "Tipo do veiculo: ";
-                getline(cin, veiculo.tipo);
+                cout << "Tipo do veiculo: " << endl;
+                cin >> veiculo.tipo;
 
-                cout << "Ano do veiculo: ";
+                cout << "Ano do veiculo: " << endl;
                 cin >> veiculo.ano;
 
-                cout << "Km do veiculo: ";
+                cout << "Km do veiculo: " << endl;
                 cin >> veiculo.km;
 
-                cout << "Potencia do veiculo: ";
+                cout << "Potencia do veiculo: " << endl;
                 cin >> veiculo.potencia;
 
-                cout << "Combustivel do veiculo: ";
-                cin.ignore();
-                getline(cin, veiculo.combustivel);
+                cout << "Combustivel do veiculo: " << endl;
+                cin >> veiculo.combustivel;
 
-                cout << "Cambio do veiculo: ";
-                getline(cin, veiculo.cambio);
+                cout << "Cambio do veiculo: " << endl;
+                cin >> veiculo.cambio;
 
-                cout << "Direcao do veiculo: ";
-                getline(cin, veiculo.direcao);
+                cout << "Direcao do veiculo: " << endl;
+                cin >> veiculo.direcao;
 
-                cout << "Cor do veiculo: ";
-                getline(cin, veiculo.cor);
+                cout << "Cor do veiculo: " << endl;
+                cin >> veiculo.cor;
 
-                cout << "Numero de portas do veiculo: ";
+                cout << "Numero de portas do veiculo: " << endl;
                 cin >> veiculo.nPortas;
 
-                cout << "Placa do veiculo: ";
-                cin.ignore();
-                getline(cin, veiculo.placa);
-                cout << endl;
+                cout << "Placa do veiculo: " << endl;
+                cin >> veiculo.placa;
 
                 veiculo.prox = NULL;
 
@@ -122,8 +119,7 @@ int main(int argc, char** argv) {
                 cout << "Digite a placa do veiculo que sera removida: ";
                 string placa;
 
-                cin.ignore();
-                getline(cin, placa);
+                cin >> placa;
                 cout << endl;
 
                 if (remove_enc(lista, placa)) {
